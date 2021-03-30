@@ -11,8 +11,7 @@ class Comment(db.Model):
     # user = db.relationship("User", back_populates="comments")
     # photo = db.relationship("Photo", back_populates="comments")
     # like = db.relationship("Like", back_populates="comments")
-    user = db.relationship("User", backref="comments")
-    photot = db.relationship("Photo", backref="comments")
+    # photot = db.relationship("Photo", backref="comments")
 
     def to_dict(self):
         userName = self.user.userName

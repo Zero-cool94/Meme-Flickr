@@ -10,17 +10,19 @@ class Photo(db.Model):
     # user = db.relationship("User", back_populates="photos")
     # comment = db.relationship("Comment", back_populates="photos")
     # like = db.relationship("Like", back_populates="photos")
-    user = db.relationship('User', backref="photos")
+    tag = db.relationship('Tag', backref='photos')
+    like = db.relationship('Like', backref='photos')
+    comment = db.relationship("Comment", backref="photos")
 
     def to_dict(self):
         user = self.user.to_dict()
         userName = user['userName']
-        likesByUser = [like.to_list() for like in self.likes]
+        # likesByUser = [like.to_list() for like in self.likes]
 
         return {
             "id": self.id,
             "userId": self.userId,
             "photoURL": self.photoURL,
             "userName": userName,
-            "likesByUser": likesByUser,
+            # "likesByUser": likesByUser,
         }
