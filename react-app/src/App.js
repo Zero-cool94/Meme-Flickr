@@ -7,6 +7,7 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
 import { authenticate } from "./services/auth";
+import GetPhotos from "./components/Photo"
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -46,7 +47,7 @@ function App() {
           <User />
         </ProtectedRoute>
         <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
-          <h1>My Home Page</h1>
+         <GetPhotos />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

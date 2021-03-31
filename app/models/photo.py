@@ -15,14 +15,9 @@ class Photo(db.Model):
     comment = db.relationship("Comment", backref="photos")
 
     def to_dict(self):
-        user = self.user.to_dict()
-        userName = user['userName']
-        # likesByUser = [like.to_list() for like in self.likes]
 
         return {
             "id": self.id,
             "userId": self.userId,
             "photoURL": self.photoURL,
-            "userName": userName,
-            # "likesByUser": likesByUser,
         }
