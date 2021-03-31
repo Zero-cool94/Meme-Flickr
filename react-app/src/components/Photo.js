@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import * as classes from "./photo.module.css"
-import { getLikes } from "../store/likes";
+import "./photo.css"
+import {GridList,GridListTile} from '@material-ui/core';
+
+
 
 
 
@@ -15,26 +17,41 @@ const GetPhotos= ({setAuthenticated}) => {
       const response = await fetch("/api/photos")
       if (!response.ok) return response.status
       const {photos} = await response.json()
-      console.log(photos)
+
       setPhoto([...photo,...photos])
     };
 onLoad()
   })
-  let comp
-  if (photo.length){
-    comp = photo.map(el => {
+//   let comp
+//   if (photo.length){
+//     comp = photo.map(el => {
 
-      const inline = {"background":`url(${el.photoURL})`}
-       return (
-      <li>
-        <div style={inline} className={classes.img_div}></div>
-      </li>
-    )})
-  }
+//       const inline = {"background":`url(${el.photoURL})`}
+//        return (
+//       <li>
+//         <img style={inline} className={"img_div"}/>
+//       </li>
+//     )})
+//   }
+
+// <ul>
+// {comp?comp:null}
+// </ul>
+console.log(photo[0]?.photoURL)
   return (
-  <ul>
-    {comp?comp:null}
-  </ul>
+    <GridList cellHeight={160} className="classes.gridList" cols={3}>
+  {photo.map((tile) => (
+    <GridListTile key={`url(${tile.photoURL})`} cols={tile.cols || 1}>
+      <img src={tile.photoURL} alt={tile.id} />
+    </GridListTile>
+  ))}
+</GridList>
+
+
 )}
+
+
+
+
 
 export default GetPhotos;

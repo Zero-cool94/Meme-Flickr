@@ -9,7 +9,7 @@ from .models import db, User, Photo, Tag, Comment, Like
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.photo_routes import photo_routes
-from .api.like_routes import like_routes
+from .api.likes_routes import like_routes
 
 from .seeds import seed_commands
 
