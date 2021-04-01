@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./photo.css"
 import {GridList,GridListTile} from '@material-ui/core';
+import IconButton from '@material-ui/core/IconButton';
+import InfoIcon from '@material-ui/icons/Info';
+import GridListTileBar from '@material-ui/core/GridListTileBar';
 
 
 
@@ -37,13 +40,25 @@ onLoad()
 // <ul>
 // {comp?comp:null}
 // </ul>
-console.log(photo[0]?.photoURL)
+// console.log(photo[0]?.photoURL)
   return (
-    <GridList cellHeight={160} className="classes.gridList" cols={3}>
+    <GridList cellHeight={350} className={"gridList"} cols={3}>
   {photo.map((tile) => (
-    <GridListTile key={`url(${tile.photoURL})`} cols={tile.cols || 1}>
-      <img src={tile.photoURL} alt={tile.id} />
-    </GridListTile>
+    <GridListTile   key={`url(${tile.photoURL})`} cols={tile.cols || 1}>
+    <div>
+      <img className={"img_home"}  src={tile.photoURL} alt={tile.id} />
+      </div>
+      <GridListTileBar
+              title={tile.title}
+              // subtitle={<span>by: {tile.author}</span>}
+              actionIcon={
+                <IconButton aria-label={`info about ${tile.title}`} className={"classes.icon"}>
+                  <InfoIcon />
+                </IconButton>
+              }
+            />
+          </GridListTile>
+
   ))}
 </GridList>
 

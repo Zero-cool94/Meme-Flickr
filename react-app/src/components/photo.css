@@ -1,4 +1,10 @@
-.img_div {
+/* .img_div {
   width: 300px;
   height: 300px;
+} */
+.img_home {
+  height: 354px;
+  object-fit: cover;
+  max-width: 100%;
+  object-position: center;
 }
