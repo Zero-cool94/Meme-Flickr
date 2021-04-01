@@ -8,11 +8,10 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 
 
 
-
-
 const GetPhotos= ({setAuthenticated}) => {
   const [photo, setPhoto] = useState([])
   const [loaded, setLoaded] = useState(false);
+  const [likes , setLikes] = useState([])
   useEffect(() =>{
     if (loaded)return
     const onLoad = async () => {
@@ -22,25 +21,41 @@ const GetPhotos= ({setAuthenticated}) => {
       const {photos} = await response.json()
 
       setPhoto([...photo,...photos])
-    };
-onLoad()
-  })
-//   let comp
-//   if (photo.length){
-//     comp = photo.map(el => {
 
-//       const inline = {"background":`url(${el.photoURL})`}
-//        return (
-//       <li>
-//         <img style={inline} className={"img_div"}/>
-//       </li>
-//     )})
-//   }
+    }
 
-// <ul>
-// {comp?comp:null}
-// </ul>
-// console.log(photo[0]?.photoURL)
+    onLoad()
+    })
+    useEffect(() =>{
+
+      let photoId;
+      if(photo){
+      photoId = photo.map(img => img.id)
+      }else return null
+    async function getLikes (id){
+
+
+    const response = await fetch(`/api/likes/${id}`)
+    if (response.ok){
+      const upVote = await response.json()
+
+      setLikes([...likes, upVote])
+      // return likes
+
+    }else return response.status
+};
+
+  // if(photoId)photoId.forEach(id => getLikes(id))
+  getLikes(1)
+},[photo])
+
+
+
+
+
+
+
+
   return (
     <GridList cellHeight={350} className={"gridList"} cols={3}>
   {photo.map((tile) => (

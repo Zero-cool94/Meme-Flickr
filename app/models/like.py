@@ -14,12 +14,12 @@ class Like(db.Model):
     # comment = db.relationship("Comment", back_populates="likes")
     # comment = db.relationship('Comment', backref='likes')
 
-    def to_list(self):
-        return self.userId
+    # def to_list(self):
+    #     return self.userId
 
     def to_dict(self):
         return {
             "id": self.id,
             "userId": self.userId,
-            "photoId": self.postId,
+            "photoId": self.photoId,
         }
