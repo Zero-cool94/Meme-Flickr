@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux"
+// import { useHistory } from "react-router-dom";
+import { setUser } from "../../store/auth";
 import { Redirect } from "react-router-dom";
 import { login } from "../../services/auth";
 import Avatar from '@material-ui/core/Avatar';
@@ -54,6 +57,8 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch()
+  // const history = useHistory()
 
   const onLogin = async (e) => {
     e.preventDefault();
@@ -76,6 +81,12 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
   if (authenticated) {
     return <Redirect to="/" />;
   }
+
+  const handleDemoClick = async (e) => {
+    const demoUser = await login("demo@aa.io", "password");
+    dispatch(setUser(demoUser));
+    setAuthenticated(true);
+  };
 
   return (
 
@@ -143,11 +154,24 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
         }}
         type="submit"
         fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
+        variant="contained"
+        color="primary"
+        className={classes.submit}
         >
         Login
+        </Button>
+        <Button
+        style={{
+        backgroundColor: "#128fdc",
+        }}
+        type="click"
+        fullWidth
+        onClick={handleDemoClick}
+        variant="contained"
+        color="primary"
+        className={classes.submit}
+        >
+        Demo User
         </Button>
       </div>
       <Grid container>
