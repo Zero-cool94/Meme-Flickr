@@ -97,6 +97,7 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
       <div>
         {/* <label htmlFor="email">Email</label> */}
         <TextField
+
          variant="outlined"
             margin="normal"
             required
@@ -113,6 +114,7 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
       <div>
         {/* <label htmlFor="password">Password</label> */}
         <TextField
+        // className="textfield" InputLabelProps={{className:textfield__form}}
            variant="outlined"
             margin="normal"
             required
@@ -122,14 +124,23 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
             type="password"
             id="password"
             autoComplete="current-password"
-          value={password}
-          onChange={updatePassword}
+            value={password}
+            onChange={updatePassword}
         />
          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
+
+            control={<Checkbox
+              style={{
+        color: "#128fdc",
+        }}
+            value="remember"
+             color="primary" />}
             label="Remember me"
           />
         <Button
+        style={{
+        backgroundColor: "#128fdc",
+        }}
         type="submit"
         fullWidth
             variant="contained"
