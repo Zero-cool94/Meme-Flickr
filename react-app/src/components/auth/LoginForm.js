@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: "#128fdc",
   },
   form: {
     width: '100%', // Fix IE 11 issue.
@@ -106,37 +106,34 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
         ))}
       </div>
       <div>
-        {/* <label htmlFor="email">Email</label> */}
         <TextField
-
          variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-          value={email}
-          onChange={updateEmail}
+         margin="normal"
+         required
+         fullWidth
+         id="email"
+         label="Email Address"
+         name="email"
+         autoComplete="email"
+         autoFocus
+         value={email}
+         onChange={updateEmail}
         />
       </div>
       <div>
-        {/* <label htmlFor="password">Password</label> */}
         <TextField
         // className="textfield" InputLabelProps={{className:textfield__form}}
-           variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            value={password}
-            onChange={updatePassword}
+         variant="outlined"
+         margin="normal"
+         required
+         fullWidth
+         name="password"
+         label="Password"
+         type="password"
+         id="password"
+         autoComplete="current-password"
+         value={password}
+         onChange={updatePassword}
         />
          <FormControlLabel
 
@@ -177,13 +174,23 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
       <Grid container>
             <Grid item xs>
             <div>
-              <Link href="#" variant="body2">
+              <Link
+              style={{
+              color: "#128fdc",
+                      }}
+              href="#"
+              variant="body2">
                 Forgot password?
               </Link>
               </div>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link
+              style={{
+              color: "#128fdc",
+                      }}
+               href="/sign-up"
+               variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
