@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./photo.css"
 import {GridList,GridListTile} from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
-import InfoIcon from '@material-ui/icons/Info';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 
 
@@ -68,7 +68,7 @@ const GetPhotos= ({setAuthenticated}) => {
               // subtitle={<span>by: {tile.author}</span>}
               actionIcon={
                 <IconButton aria-label={`like  ${tile.like}`} className={"classes.icon"}>
-                  <InfoIcon />
+                  <FavoriteIcon />
                 </IconButton>
               }
             />

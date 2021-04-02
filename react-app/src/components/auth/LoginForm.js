@@ -123,6 +123,9 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
       <div>
         <TextField
         // className="textfield" InputLabelProps={{className:textfield__form}}
+        style={{
+          borderColor: "#128fdc",
+        }}
          variant="outlined"
          margin="normal"
          required
