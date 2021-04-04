@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { signUp } from '../../services/auth';
-import { setUser } from "../../store/auth";
+// import { setUser } from "../../store/auth";
 import { Redirect } from "react-router-dom";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 const SignUpForm = ({authenticated, setAuthenticated}) => {
-  // const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -61,6 +61,8 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
       const user = await signUp(username, email, password);
       if (!user.errors) {
         setAuthenticated(true);
+      } else {
+        setErrors(user.errors);
       }
     }
   };
@@ -96,6 +98,11 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
       sign-up to Meme-Flickr
       </Typography>
     <form className={classes.form} noValidate onSubmit={onSignUp}>
+      <div>
+        {errors.map((error) => (
+          <div>{error}</div>
+        ))}
+      </div>
       <div>
       <TextField
           variant="outlined"

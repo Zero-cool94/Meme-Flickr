@@ -13,7 +13,7 @@ const addLike = (like) => ({
 
 const getLike = (likes) => ({
     type: GET_LIKES,
-    likes
+    payload: likes
 })
 
 
@@ -52,13 +52,8 @@ export const createLike = (likeObj) => async (dispatch) => {
 export const getLikes = () => async (dispatch) => {
 
     const response = await fetch(`/api/likes/`)
-
-    if (response.ok) {
-        const res = await response.json();
-        dispatch(getLike(res.likes));
-    }
-
-    return response;
+    const res = await response.json();
+    dispatch(getLike(res));
 };
 
 
@@ -91,9 +86,9 @@ export const unLike = (likeObj) => async (dispatch) => {
 
 
 // Reducer
-const initialState = {}
+// const initialState = {}
 
-const likesReducer = (state = initialState, action) => {
+const likesReducer = (state = {}, action) => {
     let newState;
     switch (action.type) {
         case ADD_LIKE:
@@ -106,11 +101,14 @@ const likesReducer = (state = initialState, action) => {
             }
         case GET_LIKES:
             newState = {}
-            action.likes.forEach(like => newState[like.id] = like)
-            return {
-                ...state,
-                ...newState,
-            }
+            action.payload.likes.forEach(like => {
+                newState[like.id] = like
+            })
+            // return {
+            //     ...state,
+            //     ...newState,
+            // }
+            return newState
         case DELETE_LIKE:
             newState = { ...state }
             delete newState[action.id]

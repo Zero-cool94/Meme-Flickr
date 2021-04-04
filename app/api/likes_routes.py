@@ -2,27 +2,24 @@ from flask import Blueprint, jsonify, redirect, request
 from app.models import db, Photo, User, Like
 
 
-like_routes = Blueprint("likes", __name__)
+likes_routes = Blueprint("likes", __name__)
 
 
-# @song_routes.route('/get')
-# def get_songs():
-#     songs = {"songs": [song.to_dict() for song in Song.query.limit(16).all()]} # noqa
-
-
-@like_routes.route('/<int:id>')
-def get_like(id):
+@likes_routes.route('/')
+def get_like():
     # likes = []
     # for like in Like.query.filter(Like.photoId == id).all():
     #     likes = {like.id: like.to_dict()}
     # res = {
     #     "likes": likes
     # }
-    count = Like.query.filter(Like.photoId == id).count()
-    return jsonify(count)
+    likes = Like.query.filter(not not Like.photoId).all()
+    # likes = Photo.query.join(Like).all()
+    # likes = Like.query.all()
+    return jsonify({"likes": [like.to_dict() for like in likes]})
 
 
-# @like_routes.route('', methods=['POST'])
+# @like_routes.route('/<int:id>', methods=['POST'])
 # def like():
 #     like = ''
 #     if 'photoId' in request.json and 'userId' in request.json:

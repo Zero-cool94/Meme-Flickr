@@ -20,4 +20,5 @@ class Photo(db.Model):
             "id": self.id,
             "userId": self.userId,
             "photoURL": self.photoURL,
+            # "like": [like.to_dict() for like in self.like],
         }
