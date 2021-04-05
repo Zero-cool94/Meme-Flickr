@@ -5,31 +5,17 @@ from app.models import db, Photo, User, Like
 likes_routes = Blueprint("likes", __name__)
 
 
-@likes_routes.route('/')
-def get_like():
-    # likes = []
-    # for like in Like.query.filter(Like.photoId == id).all():
-    #     likes = {like.id: like.to_dict()}
-    # res = {
-    #     "likes": likes
-    # }
-    likes = Like.query.filter(not not Like.photoId).all()
-    # likes = Photo.query.join(Like).all()
-    # likes = Like.query.all()
-    return jsonify({"likes": [like.to_dict() for like in likes]})
+@likes_routes.route('/<int:id>', methods=['POST'])
+def like(id):
+    like = ''
+    if 'userId' in request.json:
+        # add current_user.id to userId variable
+        like = Like(photoId=id,
+                    userId=request.json['userId'])
 
-
-# @like_routes.route('/<int:id>', methods=['POST'])
-# def like():
-#     like = ''
-#     if 'photoId' in request.json and 'userId' in request.json:
-#         # add current_user.id to userId variable
-#         like = Like(photoId=request.json['photoId'],
-#                     userId=request.json['userId'])
-
-#     db.session.add(like)
-#     db.session.commit()
-#     return jsonify(like.to_dict())
+    db.session.add(like)
+    db.session.commit()
+    return jsonify(like.to_dict())
 
 
 # @like_routes.route('')
@@ -55,3 +41,17 @@ def get_like():
 #     db.session.commit()
 
 #     return jsonify({'id': like.id, 'success': True if success else False})
+
+
+# @likes_routes.route('/')
+# def get_likes():
+#     # likes = []
+#     # for like in Like.query.filter(Like.photoId == id).all():
+#     #     likes = {like.id: like.to_dict()}
+#     # res = {
+#     #     "likes": likes
+#     # }
+#     likes = Like.query.all()
+#     # likes = Photo.query.join(Like).all()
+#     # likes = Like.query.all()
+#     return jsonify({"likes": [like.to_dict() for like in likes]})
