@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { getComments } from "../store/comments";
 import "./photo.css";
 import { GridList, GridListTile } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import CommentIcon from "@material-ui/icons/Comment";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
-import { createLike, getLikes, unLike } from "../store/likes";
+// import { createLike, getLikes, unLike } from "../store/likes";
 import { makeStyles } from "@material-ui/core/styles";
 // import { useHistory } from "react-router-dom";
 
@@ -18,7 +19,8 @@ const GetPhotos = ({ setAuthenticated }) => {
   const [photos, setPhoto] = useState([]);
   const [loaded, setLoaded] = useState(false);
   const [counter, setCounter] = useState(photos.length);
-  // const dispatch = useDispatch();
+  const comments = useSelector((state) => state?.comments?.commentsArray);
+  const dispatch = useDispatch();
   // const [likes, setLikes] = useState([0]);
   const { user } = useSelector((state) => state.session);
 
@@ -32,13 +34,15 @@ const GetPhotos = ({ setAuthenticated }) => {
 
       setPhoto([...photos, ...photosData]);
       setCounter(photos.length);
+      dispatch(getComments(comments));
     };
 
     onLoad();
-  });
-  // useEffect(() =>{
-  //   dispatch(getLikes())
-  // },[dispatch])
+    // let commentCount = 0;
+    // Object.values(comments).map((comment) => {
+    //   if (comment.photoId === photos.id) commentCount += 1;
+    // });
+  }, [dispatch, user]);
 
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -80,6 +84,7 @@ const GetPhotos = ({ setAuthenticated }) => {
     addLike();
     window.location.reload();
   }
+
   return (
     <>
       <GridList cellHeight={350} className={classes.gridList} cols={3}>
@@ -110,6 +115,7 @@ const GetPhotos = ({ setAuthenticated }) => {
                     className={classes.icon}
                   >
                     <CommentIcon />
+                    {/* <div className="right">{commentCount} Comments</div> */}
                   </IconButton>
                 </>
               }

@@ -1,16 +1,15 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 // import { login } from '../react-app/src/services';
-import likesReducer from "./likes"
+import likesReducer from "./likes";
+import commentsReducer from "./comments";
 
 import sessionReducer from "./auth";
-
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   // photo: photoReducer,
-  // comments: commentsReducer,
-
+  comments: commentsReducer,
   likes: likesReducer,
 });
 
