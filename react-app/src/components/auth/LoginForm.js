@@ -49,6 +49,9 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  item: {
+    color: theme.palette.primary.light,
+  },
 }));
 
 const LoginForm = ({ authenticated, setAuthenticated }) => {
@@ -114,6 +117,8 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
               autoFocus
               value={email}
               onChange={updateEmail}
+              className={classes.item}
+              color="#128fdc"
             />
           </div>
           <div>
@@ -128,8 +133,9 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
               id="password"
               autoComplete="current-password"
               value={password}
+              className={classes.item}
               onChange={updatePassword}
-              borderColor="#128fdc"
+              color="#128fdc"
             />
             <FormControlLabel
               control={

@@ -11,7 +11,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import Link from "@material-ui/core/Link";
 import Button from "@material-ui/core/Button";
-// import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -95,14 +95,6 @@ const NavBar = ({ setAuthenticated }) => {
               Home
             </Link>{" "}
           </Typography>
-          {/* <Button
-        variant="contained"
-        color="default"
-        className={classes.button}
-        startIcon={<CloudUploadIcon />}
-      >
-        Upload
-      </Button> */}
           <input
             accept="image/*"
             className={classes.input}
@@ -111,10 +103,18 @@ const NavBar = ({ setAuthenticated }) => {
             type="file"
           />
           <label htmlFor="contained-button-file">
-            <Button variant="contained" color="primary" component="span">
+            <Button
+              variant="contained"
+              color="default"
+              className={classes.button}
+              startIcon={<CloudUploadIcon />}
+            >
               Upload
             </Button>
           </label>
+          {/* <Button variant="contained" color="primary" component="span">
+              Upload
+            </Button> */}
 
           <LogoutButton setAuthenticated={setAuthenticated} />
           <div className={classes.search}>

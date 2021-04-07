@@ -7,10 +7,11 @@ comment_routes = Blueprint('comments', __name__)
 
 @comment_routes.route('/')
 def allComments():
-    # get the comments
-    comments = Comment.query.all()
+    photos = Photo.query.all()
+    # print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>", photos)
+    # [[print(l.users) for l in photo.like] for photo in photos]
     return {
-        "comments": [comment.to_dict() for comment in comments]
+        "photos": [{**photo.to_dict(),  "comments": [li.to_dict() for li in photo.comment], "likes": [li.to_dict() for li in photo.like]} for photo in photos]  # noqa
     }
 
 # get a specific post's comments based on postId
