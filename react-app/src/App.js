@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
@@ -9,8 +9,10 @@ import { useDispatch } from "react-redux";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
 import { authenticate } from "./services/auth";
-import GetPhotos from "./components/Photo"
+import GetPhotos from "./components/Photo";
 import * as sessionActions from "./store/auth";
+import * as photosActions from "./store/photos";
+import getPhotos from "./store/photos";
 
 function App() {
   const dispatch = useDispatch();
@@ -19,12 +21,13 @@ function App() {
   const [sessionUser, setSessionUser] = useState({});
 
   useEffect(() => {
-    (async() => {
+    (async () => {
       const user = await authenticate();
       if (!user.errors) {
         setSessionUser(user);
         setAuthenticated(true);
         dispatch(sessionActions.restoreUser());
+        dispatch(photosActions.getPhotos());
       }
       setLoaded(true);
     })();
@@ -36,11 +39,8 @@ function App() {
 
   return (
     <>
-    {/* <BrowserRouter> */}
-    {authenticated && (
-      <NavBar setAuthenticated={setAuthenticated} />
-
-    )}
+      {/* <BrowserRouter> */}
+      {authenticated && <NavBar setAuthenticated={setAuthenticated} />}
 
       <Switch>
         <Route path="/login" exact={true}>
@@ -50,19 +50,30 @@ function App() {
           />
         </Route>
         <Route path="/sign-up" exact={true}>
-          <SignUpForm authenticated={authenticated} setAuthenticated={setAuthenticated} />
+          <SignUpForm
+            authenticated={authenticated}
+            setAuthenticated={setAuthenticated}
+          />
         </Route>
-        <ProtectedRoute path="/users" exact={true} authenticated={authenticated}>
-          <UsersList/>
+        <ProtectedRoute
+          path="/users"
+          exact={true}
+          authenticated={authenticated}
+        >
+          <UsersList />
         </ProtectedRoute>
-        <ProtectedRoute path="/users/:userId" exact={true} authenticated={authenticated}>
+        <ProtectedRoute
+          path="/users/:userId"
+          exact={true}
+          authenticated={authenticated}
+        >
           <User />
         </ProtectedRoute>
         <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
-         <GetPhotos />
+          <GetPhotos />
         </ProtectedRoute>
       </Switch>
-    {/* </BrowserRouter> */}
+      {/* </BrowserRouter> */}
     </>
   );
 }
