@@ -20,10 +20,12 @@ const ShowPosts = ({
   setCurrentPhoto,
   handleClose,
   open,
-  comments,
+  // comments,
   setOpen,
 }) => {
-  const [comment, setComment] = React.useState(null);
+  // const [comment, setComment] = React.useState(null);
+  // comments = comments ? Object.values(comments) : undefined;
+  let comments = currentPhoto;
   const useStyles = makeStyles((theme) => ({
     root: {
       width: "100%",
@@ -35,22 +37,6 @@ const ShowPosts = ({
     },
   }));
   const classes = useStyles();
-  const getComment = async (id) => {
-    const res = await fetch(`/api/comments/${id}`);
-
-    let { comments } = await res.json();
-
-    return comments;
-  };
-  useEffect(() => {
-    (async () => {
-      if (currentPhoto) {
-        let comments = await getComment(currentPhoto);
-        setComment(comments);
-      }
-    })();
-  }, [currentPhoto]);
-
   return (
     <Dialog
       open={open}
@@ -59,8 +45,8 @@ const ShowPosts = ({
     >
       <DialogTitle id="form-dialog-title">add your comments here.</DialogTitle>
       <List className={classes.root}>
-        {comment &&
-          comment.map((oneComment) => {
+        {comments &&
+          comments.map((oneComment) => {
             return (
               <ListItem alignItems="flex-start">
                 <ListItemAvatar>
@@ -75,9 +61,7 @@ const ShowPosts = ({
                         variant="body2"
                         className={classes.inline}
                         color="textPrimary"
-                      >
-                        Ali Connors
-                      </Typography>
+                      ></Typography>
                       {/* {oneComment.body} */}
                     </React.Fragment>
                   }

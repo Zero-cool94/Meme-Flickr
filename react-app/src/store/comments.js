@@ -18,10 +18,12 @@ const deleteComments = (id) => ({
 });
 
 // get all comments in database
-export const getComments = () => async (dispatch) => {
-  const response = await fetch(`/api/comments/`);
+export const getComments = (id) => async (dispatch) => {
+  const response = await fetch(`/api/comments/${id}`);
+
   if (response.ok) {
     const res = await response.json();
+    console.log(">>>>>>>>>>>>>>>>", res);
     dispatch(setComments(res.comments));
     return response;
   }
