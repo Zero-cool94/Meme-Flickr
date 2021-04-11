@@ -94,6 +94,9 @@ const NavBar = ({ setAuthenticated }) => {
             <Link color="inherit" href="/">
               Home
             </Link>{" "}
+            <Link color="inherit" href="/profile">
+              Profile
+            </Link>{" "}
           </Typography>
           <input
             accept="image/*"

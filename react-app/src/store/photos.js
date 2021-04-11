@@ -17,7 +17,6 @@ export const getPhotos = () => async (dispatch) => {
 const initialState = {};
 
 const photosReducer = (state = initialState, action = {}) => {
-  let newState;
   let allPhotos;
   switch (action.type) {
     case SET_PHOTOS:
