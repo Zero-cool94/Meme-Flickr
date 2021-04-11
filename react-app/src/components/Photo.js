@@ -8,10 +8,6 @@ import IconButton from "@material-ui/core/IconButton";
 import CommentIcon from "@material-ui/icons/Comment";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
-import BottomNavigation from "@material-ui/core/BottomNavigation";
-import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-import RestoreIcon from "@material-ui/icons/Restore";
-import LocationOnIcon from "@material-ui/icons/LocationOn";
 // import TextField from "@material-ui/core/TextField";
 // import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
@@ -22,42 +18,15 @@ import { makeStyles } from "@material-ui/core/styles";
 import ShowPosts from "./Comments";
 const GetPhotos = ({ setAuthenticated }) => {
   // const history = useHistory();
-  // const [photos, setPhoto] = useState([]);
   const [loaded, setLoaded] = useState(false);
-  // const [counter, setCounter] = useState(photos.length);
   const [open, setOpen] = React.useState(false);
   const [currentPhoto, setCurrentPhoto] = useState(null);
-  // const [commentState, setComments] = useState(null);
-  // const comments = useSelector((state) => state?.comments?.commentsArray);
   const { photos } = useSelector((state) => state?.photo);
   const dispatch = useDispatch();
-  // const likes = useSelector((state) => state?.likes);
   const { user } = useSelector((state) => state.session);
-  const [value, setValue] = React.useState(0);
+  // const likes = useSelector((state) => state?.likes);
+  // const [value, setValue] = React.useState(0);
 
-  // useEffect(() => {
-  //   if (loaded) return;
-  //   const onLoad = async () => {
-  //     setLoaded(true);
-  //     const response = await fetch("/api/photos");
-  //     if (!response.ok) return response.status;
-  //     const data = await response.json();
-  //     const { photos: photosData } = data;
-  //     const { comments } = photosData;
-
-  //     setPhoto([...photos, ...photosData]);
-  //     setCounter(photos.length);
-  //     setComments(comments);
-  //     dispatch(getPhotos());
-  //   };
-
-  //   onLoad();
-  // }, [dispatch, user]);
-
-  // let commentCount = 0;
-  // Object.values(comments).map((comment) => {
-  //   if (comment.photoId === photos.id) commentCount += 1;
-  // });
   const useStyles = makeStyles((theme) => ({
     root: {
       display: "flex",
@@ -65,12 +34,12 @@ const GetPhotos = ({ setAuthenticated }) => {
       justifyContent: "space-around",
       overflow: "hidden",
       backgroundColor: theme.palette.background.paper,
-      width: "100%",
-      maxWidth: "36ch",
+      // width: "100%",
+      // maxWidth: "36ch",
     },
-
     icon: {
-      color: "rgba(4, 0, 255, 0.9)",
+      // color: "rgba(4, 0, 255, 0.9)",
+      color: "white",
     },
     title: {
       color: theme.palette.primary.light,
@@ -85,6 +54,13 @@ const GetPhotos = ({ setAuthenticated }) => {
   }));
 
   const classes = useStyles();
+  // useEffect(() => {
+  //   if (user) dispatch(getLikes());
+  // }, [dispatch, user]);
+
+  // const likePhoto = (id) => {
+  //   dispatch(createLike({ userId: user.id, photoId: id }));
+  // };
 
   function handleLikeClick(e) {
     e.preventDefault();
@@ -104,78 +80,77 @@ const GetPhotos = ({ setAuthenticated }) => {
     addLike();
     window.location.reload();
   }
-
-  // function handleCommentClick(e) {
-  //   e.preventDefault();
-  // }
   const handleClickOpen = (e, id) => {
     setOpen(true);
     setCurrentPhoto(Object.values(photos[id].comments));
-
-    // let photo = e.target.id;
   };
   const handleClose = () => {
     setOpen(false);
     setCurrentPhoto(null);
   };
-
   return (
     <>
-      <GridList cellHeight={350} className={classes.gridList} cols={3}>
-        {photos &&
-          Object.values(photos).map((photo) => (
-            <GridListTile
-              key={`url(${photo.photoURL})`}
-              cols={0.95}
-              style={{ padding: 3 }}
-            >
-              <div>
-                <img className="img_home" src={photo.photoURL} alt={photo.id} />
-              </div>
-              <GridListTileBar
-                title={photo.title}
-                classes={{
-                  root: classes.titleBar,
-                  title: classes.title,
-                }}
-                actionIcon={
-                  <>
-                    <IconButton
-                      aria-label={`like ${photo.title}`}
-                      className={classes.icon}
-                      onClick={handleLikeClick}
-                    >
-                      <FavoriteIcon />
-                      <div className={`left`} id={photo.id}>
-                        {Object.keys(photo.likes).length} Likes
-                      </div>
-                    </IconButton>
-                    {/* <IconButton */}
-                    {/* aria-label={`comments ${photo.title}`}
+      <div className={classes.root}>
+        <GridList cellHeight={350} className={classes.gridList} cols={3}>
+          {photos &&
+            Object.values(photos).map((photo) => (
+              <GridListTile
+                key={`url(${photo.photoURL})`}
+                cols={0.95}
+                style={{ padding: 3 }}
+              >
+                <div>
+                  <img
+                    className="img_home"
+                    src={photo.photoURL}
+                    alt={photo.id}
+                  />
+                </div>
+                <GridListTileBar
+                  title={photo.title}
+                  classes={{
+                    root: classes.titleBar,
+                    title: classes.title,
+                  }}
+                  actionIcon={
+                    <>
+                      <IconButton
+                        aria-label={`like ${photo.title}`}
+                        className={classes.icon}
+                        onClick={handleLikeClick}
+                      >
+                        <FavoriteIcon />
+                        <div className={`left`} id={photo.id}>
+                          {Object.keys(photo.likes).length} Likes
+                        </div>
+                      </IconButton>
+                      {/* <IconButton */}
+                      {/* aria-label={`comments ${photo.title}`}
                       className={classes.icon}
                       onClick={handleClickOpen}
                       id={photo.id} */}
-                    {/* // > */}
-                    <CommentIcon
-                      id={photo.id}
-                      onClick={(e) => handleClickOpen(e, photo.id)}
-                      className={classes.icon}
-                    />
-                    {/* </IconButton> */}
-                    <ShowPosts
-                      currentPhoto={currentPhoto}
-                      setCurrentPhoto={setCurrentPhoto}
-                      // comments={photo.comments}
-                      handleClose={handleClose}
-                      open={open}
-                      setOpen={setOpen}
-                    />
-                  </>
-                }
-              />
-            </GridListTile>
-          ))}
-      </GridList>
+                      {/* // > */}
+                      <CommentIcon
+                        id={photo.id}
+                        onClick={(e) => handleClickOpen(e, photo.id)}
+                        className={classes.icon}
+                      />
+
+                      {/* </IconButton> */}
+                      <ShowPosts
+                        currentPhoto={currentPhoto}
+                        setCurrentPhoto={setCurrentPhoto}
+                        handleClose={handleClose}
+                        open={open}
+                        setOpen={setOpen}
+                      />
+                    </>
+                  }
+                />
+              </GridListTile>
+            ))}
+        </GridList>
+      </div>
     </>
   );
 };
