@@ -14,6 +14,7 @@ import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
+import { createComment } from "../store/comments";
 
 const ShowPosts = ({
   currentPhoto,
@@ -25,7 +26,12 @@ const ShowPosts = ({
 }) => {
   // const [comment, setComment] = React.useState(null);
   // comments = comments ? Object.values(comments) : undefined;
-  let comments = currentPhoto;
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.session);
+  const photoId = currentPhoto;
+  const [body, setBody] = useState("");
+  let comments = useSelector((state) => state.comments.commentsArray);
+  // let comments;
   const useStyles = makeStyles((theme) => ({
     root: {
       width: "100%",
@@ -37,6 +43,26 @@ const ShowPosts = ({
     },
   }));
   const classes = useStyles();
+
+  useEffect(() => {
+    dispatch(getComments(photoId));
+  }, [photoId]);
+
+  // const commentSubmitHandler = (e, id) => {
+  //   e.preventDefault();
+  //   e.target.reset();
+  //   if (!comments) return alert("There is an error");
+  //   const photoId = id;
+  //   const userId = user.id;
+  //   const newComment = dispatch(createComment(userId, photoId, comments));
+  //   if (newComment) {
+  //     // setComment("");
+  //   }
+  // };
+  const handleComments = (e) => {
+    e.preventDefault();
+    dispatch(createComment(user.id, currentPhoto, body));
+  };
   return (
     <Dialog
       open={open}
@@ -54,17 +80,17 @@ const ShowPosts = ({
                 </ListItemAvatar>
                 <ListItemText
                   primary={oneComment.body}
-                  secondary={
-                    <React.Fragment>
-                      <Typography
-                        component="span"
-                        variant="body2"
-                        className={classes.inline}
-                        color="textPrimary"
-                      ></Typography>
-                      {/* {oneComment.body} */}
-                    </React.Fragment>
-                  }
+                  // secondary={
+                  //   <React.Fragment>
+                  //     <Typography
+                  //       component="span"
+                  //       variant="body2"
+                  //       className={classes.inline}
+                  //       color="textPrimary"
+                  //     ></Typography>
+                  //     {/* {oneComment.body} */}
+                  //   </React.Fragment>
+                  // }
                 />
               </ListItem>
             );
@@ -75,6 +101,7 @@ const ShowPosts = ({
       <DialogContent>
         <TextField
           autoFocus
+          onChange={(e) => setBody(e.target.value)}
           margin="dense"
           id="name"
           label="add comment"
@@ -86,7 +113,7 @@ const ShowPosts = ({
         <Button onClick={handleClose} color="primary">
           Cancel
         </Button>
-        <Button onClick={handleClose} color="primary">
+        <Button onClick={handleComments} color="primary">
           Add
         </Button>
       </DialogActions>

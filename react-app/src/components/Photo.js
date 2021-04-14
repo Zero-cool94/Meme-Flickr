@@ -82,7 +82,7 @@ const GetPhotos = ({ setAuthenticated }) => {
   }
   const handleClickOpen = (e, id) => {
     setOpen(true);
-    setCurrentPhoto(Object.values(photos[id].comments));
+    setCurrentPhoto(id);
   };
   const handleClose = () => {
     setOpen(false);

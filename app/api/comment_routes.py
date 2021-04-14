@@ -5,16 +5,16 @@ from app.models import db, Comment, Photo
 comment_routes = Blueprint('comments', __name__)
 
 
-@comment_routes.route('/')
-def allComments():
-    photos = Photo.query.all()
-    # print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>", photos)
-    # [[print(l.users) for l in photo.like] for photo in photos]
-    return {
-        "photos": [{**photo.to_dict(),  "comments": [li.to_dict() for li in photo.comment], "likes": [li.to_dict() for li in photo.like]} for photo in photos]  # noqa
-    }
+# @comment_routes.route('/')
+# def allComments():
+#     photos = Photo.query.all()
+#     # print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>", photos)
+#     # [[print(l.users) for l in photo.like] for photo in photos]
+#     return {
+#         "photos": [{**photo.to_dict(),  "comments": [li.to_dict() for li in photo.comment], "likes": [li.to_dict() for li in photo.like]} for photo in photos]  # noqa
+#     }
 
-# get a specific post's comments based on postId
+# # get a specific post's comments based on postId
 
 
 @comment_routes.route('/<int:id>/')
@@ -25,8 +25,8 @@ def postComments(id):
     }
 
 
-@comment_routes.route('/<int:id>/', methods=['POST'])
-def new_comment(id):
+@comment_routes.route('/', methods=['POST'])
+def new_comment():
     user_comment = request.get_json()
     userId = user_comment["userId"]
     photoId = user_comment['photoId']

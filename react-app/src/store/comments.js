@@ -23,7 +23,6 @@ export const getComments = (id) => async (dispatch) => {
 
   if (response.ok) {
     const res = await response.json();
-    console.log(">>>>>>>>>>>>>>>>", res);
     dispatch(setComments(res.comments));
     return response;
   }
@@ -35,18 +34,18 @@ export const createComment = (userId, photoId, body) => async (dispatch) => {
     headers: { "Content-Type": "Application/json" },
     body: JSON.stringify({ userId, photoId, body }),
   };
-  const response = await fetch(`/api/comments/${photoId}/`, build);
-  if (!response.ok) alert("ERROR");
+  const response = await fetch(`/api/comments/`, build);
+  if (!response.ok) alert("ERROR something went wrong ");
   const data = await response.json();
-  return dispatch(createComments([data]));
+  return dispatch(createComments(data));
 };
 
 // Deleting a comment
-export const deleteComment = (photoId) => async (dispatch) => {
+export const deleteComment = (id) => async (dispatch) => {
   const build = {
     method: "DELETE",
   };
-  const response = await fetch(`/api/comments/${photoId}/`, build);
+  const response = await fetch(`/api/comments/${id}/`, build);
   const result = response.json();
   dispatch(deleteComments(result));
   return response;
@@ -66,11 +65,11 @@ const commentsReducer = (state = initialState, action) => {
         commentsArray: allComments,
       };
     case CREATE_COMMENTS:
-      allComments = [];
-      action.comments.forEach((comment) => {
-        allComments.unshift(comment);
-      });
-      const newCommentsArray = [...allComments, ...state.commentsArray];
+      // allComments = [];
+      // action.comments.forEach((comment) => {
+      //   allComments.unshift(comment);
+      // });
+      const newCommentsArray = [...state.commentsArray, action.comments];
       return {
         commentsArray: newCommentsArray,
       };

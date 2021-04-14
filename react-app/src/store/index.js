@@ -2,7 +2,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 // import { login } from '../react-app/src/services';
 // import likesReducer from "./likes";
-// import commentsReducer from "./comments";
+import commentsReducer from "./comments";
 import photosReducer from "./photos";
 
 import sessionReducer from "./auth";
@@ -10,7 +10,7 @@ import sessionReducer from "./auth";
 const rootReducer = combineReducers({
   session: sessionReducer,
   photo: photosReducer,
-  // comments: commentsReducer,
+  comments: commentsReducer,
   // likes: likesReducer,
 });
 
