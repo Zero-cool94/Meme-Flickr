@@ -43,10 +43,10 @@ def new_comment():
     return freshComment.to_dict()
 
 
-@comment_routes.route('/<int:id>/', methods=['DELETE'])
+@comment_routes.route('/<int:id>', methods=['DELETE'])
 def delete_comment(id):
     comment = Comment.query.get(id)
     db.session.delete(comment)
     db.session.commit()
 
-    return comment.to_dict()
+    return id

@@ -9,7 +9,6 @@ photo_routes = Blueprint('photo', __name__)
 # @login_required
 def photos():
     photos = Photo.query.all()
-    # print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>", photos)
     # [[print(l.users) for l in photo.like] for photo in photos]
     photo_state = {}
     for p in photos:

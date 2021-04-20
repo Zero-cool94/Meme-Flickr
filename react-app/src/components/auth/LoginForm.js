@@ -16,6 +16,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import GitHubIcon from "@material-ui/icons/GitHub";
 import "./LoginForm.css";
 
 function Copyright() {
@@ -23,7 +24,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
       <Link color="inherit" href="https://github.com/Zero-cool94/Meme-Flickr">
-        Emad Masoud
+        Emad Masoud <GitHubIcon />
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}

@@ -98,23 +98,25 @@ const NavBar = ({ setAuthenticated }) => {
               Profile
             </Link>{" "}
           </Typography>
-          <input
+          {/* <input
             accept="image/*"
             className={classes.input}
             id="contained-button-file"
             multiple
             type="file"
-          />
-          <label htmlFor="contained-button-file">
-            <Button
-              variant="contained"
-              color="default"
-              className={classes.button}
-              startIcon={<CloudUploadIcon />}
-            >
+          /> */}
+          {/* <label htmlFor="contained-button-file"> */}
+          <Button
+            variant="contained"
+            color="default"
+            className={classes.button}
+            startIcon={<CloudUploadIcon />}
+          >
+            <Link color="inherit" href="/image">
               Upload
-            </Button>
-          </label>
+            </Link>{" "}
+          </Button>
+          {/* </label> */}
           {/* <Button variant="contained" color="primary" component="span">
               Upload
             </Button> */}

@@ -13,6 +13,7 @@ import GetPhotos from "./components/Photo";
 import * as sessionActions from "./store/auth";
 import * as photosActions from "./store/photos";
 import getPhotos from "./store/photos";
+import Upload from "./components/Upload";
 
 function App() {
   const dispatch = useDispatch();
@@ -72,6 +73,9 @@ function App() {
         <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
           <GetPhotos />
         </ProtectedRoute>
+        <Route path="/image" exact={true} authenticated={authenticated}>
+          <Upload />
+        </Route>
       </Switch>
       {/* </BrowserRouter> */}
     </>

@@ -1,33 +1,49 @@
-// import React, { useState } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import { useHistory } from "react-router-dom";
-// import ImageUploading from "react-images-uploading";
-// // import { createNewPhoto } from "../store/photos";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
-// const Upload = () => {
-//   const history = useHistory();
-//   const dispatch = useDispatch();
-//   const [image, setImage] = useState([]);
-//   const [tag, setTags] = useState("");
-//   const sessionUser = useSelector((state) => state.session.user);
-//   const maxNumber = 1;
+const UploadPicture = () => {
+  const history = useHistory(); // so that we can redirect after the image upload is successful
+  const [image, setImage] = useState(null);
+  const [imageLoading, setImageLoading] = useState(false);
 
-//   const onChange = (imageList, addUpdateIndex) => {
-//     setImage(imageList);
-//   };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("image", image);
 
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     const photoURL = image[0]?.data_url;
-//     // add the post to the database
-//     const newPhoto = {
-//       userId: sessionUser.id,
-//       photoURL,
-//       tag,
-//     };
-//     const res = dispatch(createNewPhoto(newPhoto));
+    // aws uploads can be a bit slow—displaying
+    // some sort of loading message is a good idea
+    setImageLoading(true);
 
-//     if (res) {
-//       return history.push("/");
-//     }
-//   };
+    const res = await fetch("/api/images", {
+      method: "POST",
+      body: formData,
+    });
+    console.log(res);
+    if (res.ok) {
+      await res.json();
+      setImageLoading(false);
+      history.push("/");
+    } else {
+      setImageLoading(false);
+      // a real app would probably use more advanced
+      // error handling
+      console.log("error");
+    }
+  };
+
+  const updateImage = (e) => {
+    const file = e.target.files[0];
+    setImage(file);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input type="file" accept="image/*" onChange={updateImage} />
+      <button type="submit">Submit</button>
+      {imageLoading && <p>Loading...</p>}
+    </form>
+  );
+};
+
+export default UploadPicture;

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getComments } from "../store/comments";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -14,7 +13,8 @@ import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
-import { createComment } from "../store/comments";
+import { createComment, deleteComment, getComments } from "../store/comments";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 
 const ShowPosts = ({
   currentPhoto,
@@ -48,17 +48,10 @@ const ShowPosts = ({
     dispatch(getComments(photoId));
   }, [photoId]);
 
-  // const commentSubmitHandler = (e, id) => {
-  //   e.preventDefault();
-  //   e.target.reset();
-  //   if (!comments) return alert("There is an error");
-  //   const photoId = id;
-  //   const userId = user.id;
-  //   const newComment = dispatch(createComment(userId, photoId, comments));
-  //   if (newComment) {
-  //     // setComment("");
-  //   }
-  // };
+  const removeComments = (id) => {
+    dispatch(deleteComment(id));
+  };
+
   const handleComments = (e) => {
     e.preventDefault();
     dispatch(createComment(user.id, currentPhoto, body));
@@ -77,6 +70,12 @@ const ShowPosts = ({
               <ListItem alignItems="flex-start">
                 <ListItemAvatar>
                   {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" /> */}
+                  <button>
+                    {" "}
+                    <DeleteForeverIcon
+                      onClick={() => removeComments(oneComment.id)}
+                    />{" "}
+                  </button>
                 </ListItemAvatar>
                 <ListItemText
                   primary={oneComment.body}

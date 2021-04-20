@@ -44,8 +44,9 @@ export const createComment = (userId, photoId, body) => async (dispatch) => {
 export const deleteComment = (id) => async (dispatch) => {
   const build = {
     method: "DELETE",
+    headers: { "Content-Type": "Application/json" },
   };
-  const response = await fetch(`/api/comments/${id}/`, build);
+  const response = await fetch(`/api/comments/${id}`, build);
   const result = response.json();
   dispatch(deleteComments(result));
   return response;
