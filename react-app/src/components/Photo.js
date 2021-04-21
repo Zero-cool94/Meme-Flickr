@@ -16,51 +16,71 @@ import { makeStyles } from "@material-ui/core/styles";
 // import { createLike, getLikes, unLike } from "../store/likes";
 // import { useHistory } from "react-router-dom";
 import ShowPosts from "./Comments";
+
+//!
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+//!
+
 const GetPhotos = ({ setAuthenticated }) => {
-  // const history = useHistory();
   const [loaded, setLoaded] = useState(false);
   const [open, setOpen] = React.useState(false);
   const [currentPhoto, setCurrentPhoto] = useState(null);
   const { photos } = useSelector((state) => state?.photo);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.session);
-  // const likes = useSelector((state) => state?.likes);
-  // const [value, setValue] = React.useState(0);
-  console.log(">>>>>>>>>>>>>>>>>>>>>>>>>", photos);
   const useStyles = makeStyles((theme) => ({
-    root: {
-      display: "flex",
-      flexWrap: "wrap",
-      justifyContent: "space-around",
-      overflow: "hidden",
-      backgroundColor: theme.palette.background.paper,
-      // width: "100%",
-      // maxWidth: "36ch",
-    },
+    // root: {
+    //   display: "flex",
+    //   flexWrap: "wrap",
+    //   justifyContent: "space-around",
+    //   overflow: "hidden",
+    //   backgroundColor: theme.palette.background.paper,
+    //   // width: "100%",
+    //   // maxWidth: "36ch",
+    // },
+    // title: {
+    //   color: theme.palette.primary.light,
+    // },
+    // titleBar: {
+    //   background:
+    //     "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
+    // },
+    // inline: {
+    //   display: "inline",
+    // },
     icon: {
-      // color: "rgba(4, 0, 255, 0.9)",
-      color: "white",
+      color: "black",
+      cursor: "pointer",
+      display: "flex",
     },
-    title: {
-      color: theme.palette.primary.light,
+    root: {
+      maxWidth: 345,
+      padding: "100px",
+      marginLeft: "30%",
+      marginRight: "10%",
+      // display: "flex",
     },
-    titleBar: {
-      background:
-        "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
+    media: {
+      height: 390,
+      marginLeft: "-77px",
+      width: "700px",
+      // height: 354px;
+      // objectFit: "cover",
+      // maxWidth: "100%",
+      // objectPosition: "center",
     },
-    inline: {
-      display: "inline",
+    likes: {
+      position: "relative",
     },
   }));
 
   const classes = useStyles();
-  // useEffect(() => {
-  //   if (user) dispatch(getLikes());
-  // }, [dispatch, user]);
-
-  // const likePhoto = (id) => {
-  //   dispatch(createLike({ userId: user.id, photoId: id }));
-  // };
 
   function handleLikeClick(e) {
     e.preventDefault();
@@ -92,9 +112,53 @@ const GetPhotos = ({ setAuthenticated }) => {
   useEffect(() => {
     dispatch(getPhotos());
   }, [dispatch]);
+
   return (
     <>
-      <div className={classes.root}>
+      {photos &&
+        Object.values(photos).map((photo) => (
+          <Card className={classes.root}>
+            <CardActionArea>
+              <CardMedia
+                className={classes.media}
+                image={photo.photoURL}
+                title="Contemplative Reptile"
+              />
+            </CardActionArea>
+            <CardActions>
+              <IconButton
+                aria-label={`like ${photo.title}`}
+                className={classes.icon}
+                onClick={handleLikeClick}
+              >
+                <FavoriteIcon />
+                <div className={classes.likes} id={photo.id}>
+                  {Object.keys(photo.likes).length} Likes
+                </div>
+              </IconButton>
+              <CommentIcon
+                id={photo.id}
+                onClick={(e) => handleClickOpen(e, photo.id)}
+                className={classes.icon}
+              />
+              <ShowPosts
+                currentPhoto={currentPhoto}
+                setCurrentPhoto={setCurrentPhoto}
+                handleClose={handleClose}
+                open={open}
+                setOpen={setOpen}
+              />
+            </CardActions>
+          </Card>
+        ))}
+    </>
+  );
+};
+
+export default GetPhotos;
+
+{
+  /* <div className={classes.root}>
         <GridList cellHeight={350} className={classes.gridList} cols={3}>
           {photos &&
             Object.values(photos).map((photo) => (
@@ -128,19 +192,11 @@ const GetPhotos = ({ setAuthenticated }) => {
                           {Object.keys(photo.likes).length} Likes
                         </div>
                       </IconButton>
-                      {/* <IconButton */}
-                      {/* aria-label={`comments ${photo.title}`}
-                      className={classes.icon}
-                      onClick={handleClickOpen}
-                      id={photo.id} */}
-                      {/* // > */}
                       <CommentIcon
                         id={photo.id}
                         onClick={(e) => handleClickOpen(e, photo.id)}
                         className={classes.icon}
                       />
-
-                      {/* </IconButton> */}
                       <ShowPosts
                         currentPhoto={currentPhoto}
                         setCurrentPhoto={setCurrentPhoto}
@@ -154,9 +210,5 @@ const GetPhotos = ({ setAuthenticated }) => {
               </GridListTile>
             ))}
         </GridList>
-      </div>
-    </>
-  );
-};
-
-export default GetPhotos;
+      </div> */
+}
