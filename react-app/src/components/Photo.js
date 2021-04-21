@@ -26,7 +26,7 @@ const GetPhotos = ({ setAuthenticated }) => {
   const { user } = useSelector((state) => state.session);
   // const likes = useSelector((state) => state?.likes);
   // const [value, setValue] = React.useState(0);
-
+  console.log(">>>>>>>>>>>>>>>>>>>>>>>>>", photos);
   const useStyles = makeStyles((theme) => ({
     root: {
       display: "flex",
@@ -88,6 +88,10 @@ const GetPhotos = ({ setAuthenticated }) => {
     setOpen(false);
     setCurrentPhoto(null);
   };
+
+  useEffect(() => {
+    dispatch(getPhotos());
+  }, [dispatch]);
   return (
     <>
       <div className={classes.root}>
