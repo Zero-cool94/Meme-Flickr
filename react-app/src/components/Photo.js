@@ -57,24 +57,43 @@ const GetPhotos = ({ setAuthenticated }) => {
     icon: {
       color: "black",
       cursor: "pointer",
-      display: "flex",
-    },
-    root: {
-      maxWidth: 345,
-      padding: "100px",
-      marginLeft: "30%",
-      marginRight: "10%",
       // display: "flex",
+      // alignItems: "center",
     },
+
+    root: {
+      // maxWidth: 905,
+      margin: "7px",
+      // maxHeight: "600px",
+      // minHeight: "400px",
+      width: "29%",
+      height: "40%",
+      backgroundColor: "#fff",
+      borderRadius: "6px",
+      border: "1px solid rgb(205, 219, 226)",
+
+      // display: "block",
+      // backgroundSize: "cover",
+      // backgroundRepeat: "no-repeat",
+      // backgroundPosition: "center",
+    },
+
     media: {
-      height: 390,
-      marginLeft: "-77px",
-      width: "700px",
+      maxHeight: 590,
+      // marginLeft: "-77px",
+      width: "400px",
+      objectFit: "fill",
+      paddingLeft: "4%",
+      // minHeight: "350px",
       // height: 354px;
-      // objectFit: "cover",
       // maxWidth: "100%",
       // objectPosition: "center",
     },
+    // img: {
+    //   objectFit: "cover",
+    //   display: "flex",
+    //   justifyContent: "center",
+    // },
     likes: {
       position: "relative",
     },
@@ -115,42 +134,45 @@ const GetPhotos = ({ setAuthenticated }) => {
 
   return (
     <>
-      {photos &&
-        Object.values(photos).map((photo) => (
-          <Card className={classes.root}>
-            <CardActionArea>
-              <CardMedia
-                className={classes.media}
-                image={photo.photoURL}
-                title="Contemplative Reptile"
-              />
-            </CardActionArea>
-            <CardActions>
-              <IconButton
-                aria-label={`like ${photo.title}`}
-                className={classes.icon}
-                onClick={handleLikeClick}
-              >
-                <FavoriteIcon />
-                <div className={classes.likes} id={photo.id}>
-                  {Object.keys(photo.likes).length} Likes
-                </div>
-              </IconButton>
-              <CommentIcon
-                id={photo.id}
-                onClick={(e) => handleClickOpen(e, photo.id)}
-                className={classes.icon}
-              />
-              <ShowPosts
-                currentPhoto={currentPhoto}
-                setCurrentPhoto={setCurrentPhoto}
-                handleClose={handleClose}
-                open={open}
-                setOpen={setOpen}
-              />
-            </CardActions>
-          </Card>
-        ))}
+      <div className="wrapper">
+        {photos &&
+          Object.values(photos).map((photo) => (
+            <Card className={classes.root}>
+              <CardActionArea>
+                {/* <CardMedia
+                  className={classes.media}
+                  image={photo.photoURL}
+                  title="Contemplative Reptile"
+                /> */}
+                <img src={photo.photoURL} className={classes.media} />
+              </CardActionArea>
+              <CardActions>
+                <IconButton
+                  aria-label={`like ${photo.title}`}
+                  className={classes.icon}
+                  onClick={handleLikeClick}
+                >
+                  <FavoriteIcon />
+                  <div className={classes.likes} id={photo.id}>
+                    {Object.keys(photo.likes).length} Likes
+                  </div>
+                </IconButton>
+                <CommentIcon
+                  id={photo.id}
+                  onClick={(e) => handleClickOpen(e, photo.id)}
+                  className={classes.icon}
+                />
+                <ShowPosts
+                  currentPhoto={currentPhoto}
+                  setCurrentPhoto={setCurrentPhoto}
+                  handleClose={handleClose}
+                  open={open}
+                  setOpen={setOpen}
+                />
+              </CardActions>
+            </Card>
+          ))}
+      </div>
     </>
   );
 };
