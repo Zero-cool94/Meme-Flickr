@@ -84,7 +84,7 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
   }
 
   const handleDemoClick = async (e) => {
-    const demoUser = await login("demo@aa.io", "password");
+    const demoUser = await login("demo@aa.io", "password"); /// set email and password
     dispatch(setUser(demoUser));
     setAuthenticated(true);
   };

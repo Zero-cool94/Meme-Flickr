@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { DropzoneAreaBase } from "material-ui-dropzone";
 
 const UploadPicture = () => {
   const history = useHistory(); // so that we can redirect after the image upload is successful
@@ -38,11 +39,20 @@ const UploadPicture = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="file" accept="image/*" onChange={updateImage} />
-      <button type="submit">Submit</button>
-      {imageLoading && <p>Loading...</p>}
-    </form>
+    <>
+      <form onSubmit={handleSubmit}>
+        <input type="file" accept="image/*" onChange={updateImage} />
+        <button type="submit">Submit</button>
+        {imageLoading && <p>Loading...</p>}
+      </form>
+
+      <DropzoneAreaBase
+        acceptedFiles={["image/*"]}
+        dropzoneText={"Drag and drop an image here or click"}
+        onChange={(files) => console.log("Files:", files)}
+        onAlert={(message, variant) => console.log(`${variant}: ${message}`)}
+      />
+    </>
   );
 };
 

@@ -63,8 +63,9 @@ const GetPhotos = ({ setAuthenticated }) => {
 
     root: {
       // maxWidth: 905,
-      margin: "7px",
       // maxHeight: "600px",
+      margin: "7px",
+      paddingTop: "16px",
       // minHeight: "400px",
       width: "29%",
       height: "40%",

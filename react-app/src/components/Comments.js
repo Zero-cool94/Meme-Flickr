@@ -44,13 +44,11 @@ const ShowPosts = ({
   }));
   const classes = useStyles();
 
+  const removeComments = (id) => dispatch(deleteComment(id));
+
   useEffect(() => {
     dispatch(getComments(photoId));
-  }, [photoId]);
-
-  const removeComments = (id) => {
-    dispatch(deleteComment(id));
-  };
+  }, [photoId, dispatch]);
 
   const handleComments = (e) => {
     e.preventDefault();
