@@ -17,6 +17,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import GitHubIcon from "@material-ui/icons/GitHub";
+
 import "./LoginForm.css";
 
 function Copyright() {
@@ -71,6 +72,14 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
     }
   };
 
+  const handleDemoClick = async (e) => {
+    e.preventDefault();
+    const demoUser = await login("demo@aa.io", "password"); /// set email and password
+    dispatch(setUser(demoUser));
+
+    setAuthenticated(true);
+  };
+
   const updateEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -78,16 +87,11 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
   const updatePassword = (e) => {
     setPassword(e.target.value);
   };
+
   const classes = useStyles();
   if (authenticated) {
     return <Redirect to="/" />;
   }
-
-  const handleDemoClick = async (e) => {
-    const demoUser = await login("demo@aa.io", "password"); /// set email and password
-    dispatch(setUser(demoUser));
-    setAuthenticated(true);
-  };
 
   return (
     <Container component="main" maxWidth="xs">
