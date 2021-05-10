@@ -7,7 +7,7 @@ Inspired by flickr.com, meme-flickr is a the place where you can find memes, you
 
 ## Getting started
 
-### [live link](https://meme-flickr.herokuapp.com/login)**
+### [live link](https://meme-flickr.herokuapp.com/login)
 
    ```bash
    git clone https://github.com/appacademy-starters/python-project-starter.git
