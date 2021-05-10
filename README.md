@@ -2,9 +2,12 @@
 
 This is the backend for the Flask React project.
 
+Brief Introduction
+Inspired by flickr.com, meme-flickr is a the place where you can find memes, you can upload, like, add comments.
+
 ## Getting started
 
-1. Clone this repository (only this branch)
+### [live link](https://meme-flickr.herokuapp.com/login)**
 
    ```bash
    git clone https://github.com/appacademy-starters/python-project-starter.git
