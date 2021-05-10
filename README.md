@@ -9,93 +9,43 @@ Inspired by flickr.com, meme-flickr is a the place where you can find memes, you
 
 ### [live link](https://meme-flickr.herokuapp.com/login)
 
-   ```bash
-   git clone https://github.com/appacademy-starters/python-project-starter.git
-   ```
+  ## Technologies
+   openChef is built using the following stack & libraries:
+ 
+## Backend 
+   1.Python 
+      *Flask-SQLAlchemy
 
-2. Install dependencies
+   2.PostgreSQL
+      *PostgreSQL is a relational database management system emphasizing extensibility and SQL                    compliance.
+   
 
-      ```bash
-      pipenv install --dev -r dev-requirements.txt && pipenv install -r requirements.txt
-      ```
+## Frontend
 
-3. Create a **.env** file based on the example with proper settings for your
-   development environment
-4. Setup your PostgreSQL user, password and database and make sure it matches your **.env** file
+   1.Javascript
+   2.React
+      *React is a JavaScript library for building user interfaces. It deals with the views and lets you        *choose the rest of your front-end architecture.
+   3.Redux
+      *Redux is a JavaScript library for managing application state.
+      
+### how to use :
+ #### Install flask dependencies in root directory
+$ pipenv install --dev -r dev-requirements.txt && pipenv install -r requirements.txt
 
-5. Get into your pipenv, migrate your database, seed your database, and run your flask app
+#### Install dependencies in react-app directory
+$ cd react-app
+$ npm install
 
-   ```bash
-   pipenv shell
-   ```
+#### Run back end server from pipenv shell
+$ pipenv shell
+$ flask run
 
-   ```bash
-   flask db upgrade
-   ```
+#### Run front end server
+$ npm start
 
-   ```bash
-   flask seed all
-   ```
+## Hosting 
+    1. Heroku
+      *Heroku is a platform as a service that enables developers to build, run, and operate applications        entirely in the cloud.
+## Features
 
-   ```bash
-   flask run
-   ```
-
-6. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
-
-***
-*IMPORTANT!*
-   If you add any python dependencies to your pipfiles, you'll need to regenerate your requirements.txt before deployment.
-   You can do this by running:
-
-   ```bash
-   pipenv lock -r > requirements.txt
-   ```
-
-*ALSO IMPORTANT!*
-   psycopg2-binary MUST remain a dev dependency because you can't install it on apline-linux.
-   There is a layer in the Dockerfile that will install psycopg2 (not binary) for us.
-***
-
-## Deploy to Heroku
-
-1. Create a new project on Heroku
-2. Under Resources click "Find more add-ons" and add the add on called "Heroku Postgres"
-3. Install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-command-line)
-4. Run
-
-   ```bash
-   heroku login
-   ```
-
-5. Login to the heroku container registry
-
-   ```bash
-   heroku container:login
-   ```
-
-6. Update the `REACT_APP_BASE_URL` variable in the Dockerfile.
-   This should be the full URL of your Heroku app: i.e. "https://flask-react-aa.herokuapp.com"
-7. Push your docker container to heroku from the root directory of your project.
-   This will build the dockerfile and push the image to your heroku container registry
-
-   ```bash
-   heroku container:push web -a {NAME_OF_HEROKU_APP}
-   ```
-
-8. Release your docker container to heroku
-
-   ```bash
-   heroku container:release web -a {NAME_OF_HEROKU_APP}
-   ```
-
-9. set up your database:
-
-   ```bash
-   heroku run -a {NAME_OF_HEROKU_APP} flask db upgrade
-   heroku run -a {NAME_OF_HEROKU_APP} flask seed all
-   ```
-
-10. Under Settings find "Config Vars" and add any additional/secret .env variables.
-
-11. profit
+    *Logged-in users have can book a chef and edit, Logged-in chef can book another chef, and edit his reservations.
