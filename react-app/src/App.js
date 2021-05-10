@@ -73,9 +73,13 @@ function App() {
         <ProtectedRoute path="/" exact={true} authenticated={authenticated}>
           <GetPhotos />
         </ProtectedRoute>
-        <Route path="/image" exact={true} authenticated={authenticated}>
+        <ProtectedRoute
+          path="/image"
+          exact={true}
+          authenticated={authenticated}
+        >
           <Upload />
-        </Route>
+        </ProtectedRoute>
       </Switch>
       {/* </BrowserRouter> */}
     </>
