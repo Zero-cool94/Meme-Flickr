@@ -10,7 +10,7 @@ Inspired by flickr.com, meme-flickr is a the place where you can find memes, you
 ### [live link](https://meme-flickr.herokuapp.com/login)
 
   ## Technologies
-   openChef is built using the following stack & libraries:
+   meme-flickr is built using the following stack & libraries:
  
 ## Backend 
    1.Python 
