@@ -98,14 +98,7 @@ const NavBar = ({ setAuthenticated }) => {
               Profile
             </Link>{" "}
           </Typography>
-          {/* <input
-            accept="image/*"
-            className={classes.input}
-            id="contained-button-file"
-            multiple
-            type="file"
-          /> */}
-          {/* <label htmlFor="contained-button-file"> */}
+
           <Button
             variant="contained"
             color="default"
