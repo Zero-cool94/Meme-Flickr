@@ -16,8 +16,6 @@ import { makeStyles } from "@material-ui/core/styles";
 // import { createLike, getLikes, unLike } from "../store/likes";
 // import { useHistory } from "react-router-dom";
 import ShowPosts from "./Comments";
-
-//!
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
@@ -25,7 +23,6 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-//!
 
 const GetPhotos = ({ setAuthenticated }) => {
   const [loaded, setLoaded] = useState(false);
@@ -57,44 +54,24 @@ const GetPhotos = ({ setAuthenticated }) => {
     icon: {
       color: "black",
       cursor: "pointer",
-      // display: "flex",
-      // alignItems: "center",
     },
 
     root: {
-      // maxWidth: 905,
-      // maxHeight: "600px",
       margin: "7px",
       paddingTop: "16px",
-      // minHeight: "400px",
       width: "29%",
       height: "40%",
       backgroundColor: "#fff",
       borderRadius: "6px",
       border: "1px solid rgb(205, 219, 226)",
-
-      // display: "block",
-      // backgroundSize: "cover",
-      // backgroundRepeat: "no-repeat",
-      // backgroundPosition: "center",
     },
 
     media: {
       maxHeight: 590,
-      // marginLeft: "-77px",
       width: "400px",
       objectFit: "fill",
       paddingLeft: "4%",
-      // minHeight: "350px",
-      // height: 354px;
-      // maxWidth: "100%",
-      // objectPosition: "center",
-    },
-    // img: {
-    //   objectFit: "cover",
-    //   display: "flex",
-    //   justifyContent: "center",
-    // },
+    },,
     likes: {
       position: "relative",
     },
@@ -140,11 +117,6 @@ const GetPhotos = ({ setAuthenticated }) => {
           Object.values(photos).map((photo) => (
             <Card className={classes.root}>
               <CardActionArea>
-                {/* <CardMedia
-                  className={classes.media}
-                  image={photo.photoURL}
-                  title="Contemplative Reptile"
-                /> */}
                 <img src={photo.photoURL} className={classes.media} />
               </CardActionArea>
               <CardActions>
@@ -181,57 +153,3 @@ const GetPhotos = ({ setAuthenticated }) => {
 export default GetPhotos;
 
 {
-  /* <div className={classes.root}>
-        <GridList cellHeight={350} className={classes.gridList} cols={3}>
-          {photos &&
-            Object.values(photos).map((photo) => (
-              <GridListTile
-                key={`url(${photo.photoURL})`}
-                cols={0.95}
-                style={{ padding: 3 }}
-              >
-                <div>
-                  <img
-                    className="img_home"
-                    src={photo.photoURL}
-                    alt={photo.id}
-                  />
-                </div>
-                <GridListTileBar
-                  title={photo.title}
-                  classes={{
-                    root: classes.titleBar,
-                    title: classes.title,
-                  }}
-                  actionIcon={
-                    <>
-                      <IconButton
-                        aria-label={`like ${photo.title}`}
-                        className={classes.icon}
-                        onClick={handleLikeClick}
-                      >
-                        <FavoriteIcon />
-                        <div className={`left`} id={photo.id}>
-                          {Object.keys(photo.likes).length} Likes
-                        </div>
-                      </IconButton>
-                      <CommentIcon
-                        id={photo.id}
-                        onClick={(e) => handleClickOpen(e, photo.id)}
-                        className={classes.icon}
-                      />
-                      <ShowPosts
-                        currentPhoto={currentPhoto}
-                        setCurrentPhoto={setCurrentPhoto}
-                        handleClose={handleClose}
-                        open={open}
-                        setOpen={setOpen}
-                      />
-                    </>
-                  }
-                />
-              </GridListTile>
-            ))}
-        </GridList>
-      </div> */
-}
