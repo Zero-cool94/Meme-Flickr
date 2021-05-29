@@ -109,11 +109,6 @@ const NavBar = ({ setAuthenticated }) => {
               Upload
             </Link>{" "}
           </Button>
-          {/* </label> */}
-          {/* <Button variant="contained" color="primary" component="span">
-              Upload
-            </Button> */}
-
           <LogoutButton setAuthenticated={setAuthenticated} />
           <div className={classes.search}>
             <div className={classes.searchIcon}>
