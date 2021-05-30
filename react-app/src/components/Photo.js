@@ -32,25 +32,6 @@ const GetPhotos = ({ setAuthenticated }) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.session);
   const useStyles = makeStyles((theme) => ({
-    // root: {
-    //   display: "flex",
-    //   flexWrap: "wrap",
-    //   justifyContent: "space-around",
-    //   overflow: "hidden",
-    //   backgroundColor: theme.palette.background.paper,
-    //   // width: "100%",
-    //   // maxWidth: "36ch",
-    // },
-    // title: {
-    //   color: theme.palette.primary.light,
-    // },
-    // titleBar: {
-    //   background:
-    //     "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
-    // },
-    // inline: {
-    //   display: "inline",
-    // },
     icon: {
       color: "black",
       cursor: "pointer",
@@ -71,7 +52,7 @@ const GetPhotos = ({ setAuthenticated }) => {
       width: "400px",
       objectFit: "fill",
       paddingLeft: "4%",
-    },,
+    },
     likes: {
       position: "relative",
     },
@@ -151,5 +132,3 @@ const GetPhotos = ({ setAuthenticated }) => {
 };
 
 export default GetPhotos;
-
-{
