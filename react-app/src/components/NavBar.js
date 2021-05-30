@@ -136,7 +136,7 @@ const NavBar = ({ setAuthenticated }) => {
           <FormGroup>
             <FormControlLabel
               control={<Switch checked={checked} onChange={toggleChecked} />}
-              label="Normal"
+              label="Night mode"
             />
           </FormGroup>
         </Toolbar>
