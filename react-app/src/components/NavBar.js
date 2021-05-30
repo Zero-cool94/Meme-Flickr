@@ -115,12 +115,6 @@ const NavBar = ({ setAuthenticated }) => {
             className={classes.button}
             startIcon={<CloudUploadIcon />}
           >
-            <FormGroup>
-              <FormControlLabel
-                control={<Switch checked={checked} onChange={toggleChecked} />}
-                label="Normal"
-              />
-            </FormGroup>
             <Link color="inherit" href="/image">
               Upload
             </Link>{" "}
@@ -139,6 +133,12 @@ const NavBar = ({ setAuthenticated }) => {
               inputProps={{ "aria-label": "search" }}
             />
           </div>
+          <FormGroup>
+            <FormControlLabel
+              control={<Switch checked={checked} onChange={toggleChecked} />}
+              label="Normal"
+            />
+          </FormGroup>
         </Toolbar>
       </AppBar>
     </div>
