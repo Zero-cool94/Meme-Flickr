@@ -12,6 +12,10 @@ import SearchIcon from "@material-ui/icons/Search";
 import Link from "@material-ui/core/Link";
 import Button from "@material-ui/core/Button";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
+import Switch from "@material-ui/core/Switch";
+import FormGroup from "@material-ui/core/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -78,6 +82,12 @@ const useStyles = makeStyles((theme) => ({
 
 const NavBar = ({ setAuthenticated }) => {
   const classes = useStyles();
+  const [checked, setChecked] = React.useState(false);
+
+  const toggleChecked = () => {
+    setChecked((prev) => !prev);
+  };
+
   return (
     <div className={classes.root}>
       <AppBar style={{ background: "#128fdc" }} position="static">
@@ -105,6 +115,12 @@ const NavBar = ({ setAuthenticated }) => {
             className={classes.button}
             startIcon={<CloudUploadIcon />}
           >
+            <FormGroup>
+              <FormControlLabel
+                control={<Switch checked={checked} onChange={toggleChecked} />}
+                label="Normal"
+              />
+            </FormGroup>
             <Link color="inherit" href="/image">
               Upload
             </Link>{" "}
